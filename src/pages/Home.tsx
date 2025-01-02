@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Drop, UserPlus, Bell } from "lucide-react";
+import { Search, Droplets, UserPlus, Bell } from "lucide-react";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -60,7 +60,7 @@ const Home = () => {
                     <Input placeholder="Location" />
                   </div>
                   <Button className="w-full bg-primary hover:bg-primary/90">
-                    <Drop className="h-4 w-4 mr-2" />
+                    <Droplets className="h-4 w-4 mr-2" />
                     Register as Donor
                   </Button>
                 </form>
