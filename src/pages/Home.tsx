@@ -16,6 +16,11 @@ const Home = () => {
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-900">NCC Blood Donation</h1>
             <div className="flex items-center space-x-4">
+              <img 
+                src="/lovable-uploads/5e30bd82-ebc5-4780-b3f7-15a6a1936240.png" 
+                alt="NCC Logo" 
+                className="h-10 w-10 object-contain"
+              />
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
               </Button>

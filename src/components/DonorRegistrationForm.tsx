@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Droplets, MapPin } from "lucide-react";
+import { Droplets, MapPin, Upload } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -12,6 +13,8 @@ export const DonorRegistrationForm = () => {
   const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(false);
   const [bloodGroup, setBloodGroup] = useState("");
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateDonorAge = (age: string) => {
     const numAge = parseInt(age);
@@ -23,8 +26,8 @@ export const DonorRegistrationForm = () => {
   };
 
   const validateName = (name: string) => {
-    if (/\d/.test(name)) {
-      toast.error("Name should not contain numbers");
+    if (/[^a-zA-Z\s]/.test(name)) {
+      toast.error("Name should only contain letters and spaces");
       return false;
     }
     return true;
@@ -36,6 +39,17 @@ export const DonorRegistrationForm = () => {
       return false;
     }
     return true;
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const getCurrentLocation = () => {
@@ -73,6 +87,23 @@ export const DonorRegistrationForm = () => {
   return (
     <Card className="p-6">
       <h2 className="text-xl font-semibold mb-4">Register as a Donor</h2>
+      <div className="flex justify-center mb-6">
+        <div className="relative">
+          <Avatar className="h-24 w-24 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+            <AvatarImage src={profileImage || ""} />
+            <AvatarFallback>
+              <Upload className="h-8 w-8 text-gray-400" />
+            </AvatarFallback>
+          </Avatar>
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+        </div>
+      </div>
       <form className="space-y-4" onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -86,7 +117,13 @@ export const DonorRegistrationForm = () => {
         // Handle form submission
       }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input name="name" placeholder="Full Name" required />
+          <Input 
+            name="name" 
+            placeholder="Full Name" 
+            required 
+            pattern="[A-Za-z\s]+"
+            title="Name should only contain letters and spaces"
+          />
           <Input
             name="age"
             placeholder="Age"
@@ -108,7 +145,17 @@ export const DonorRegistrationForm = () => {
               </SelectContent>
             </Select>
           </div>
-          <Input name="phone" placeholder="Phone Number" type="tel" pattern="\d{10}" required />
+          <Input 
+            name="phone" 
+            placeholder="Phone Number" 
+            type="tel" 
+            pattern="\d{10}" 
+            title="Phone number must be exactly 10 digits"
+            required 
+            onInput={(e) => {
+              e.currentTarget.value = e.currentTarget.value.replace(/[^\d]/g, '');
+            }}
+          />
           <Input name="email" placeholder="Email" type="email" required />
           <div className="relative">
             <Input
