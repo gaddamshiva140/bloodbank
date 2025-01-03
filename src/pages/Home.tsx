@@ -14,13 +14,15 @@ const Home = () => {
       <header className="bg-white/80 backdrop-blur-sm shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">NCC Blood Donation</h1>
             <div className="flex items-center space-x-4">
               <img 
                 src="/lovable-uploads/5e30bd82-ebc5-4780-b3f7-15a6a1936240.png" 
                 alt="NCC Logo" 
                 className="h-10 w-10 object-contain"
               />
+              <h1 className="text-2xl font-bold text-gray-900">NCC Blood Donation</h1>
+            </div>
+            <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
               </Button>
@@ -49,15 +51,28 @@ const Home = () => {
           </div>
 
           <Tabs defaultValue="donate" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="donate">I Want to Donate</TabsTrigger>
               <TabsTrigger value="request">Request Blood</TabsTrigger>
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
             <TabsContent value="donate" className="mt-6">
               <DonorRegistrationForm />
             </TabsContent>
             <TabsContent value="request" className="mt-6">
               <BloodRequestForm />
+            </TabsContent>
+            <TabsContent value="analytics" className="mt-6">
+              <div className="w-full h-[600px] bg-white rounded-lg shadow-lg p-4">
+                <iframe
+                  title="Blood Donation Analytics"
+                  width="100%"
+                  height="100%"
+                  src="https://app.powerbi.com/view?r=YOUR_POWER_BI_EMBED_CODE"
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </div>
             </TabsContent>
           </Tabs>
         </div>

@@ -35,7 +35,7 @@
     background-image: url('/lovable-uploads/5e30bd82-ebc5-4780-b3f7-15a6a1936240.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 300px;
+    background-size: cover;
     background-attachment: fixed;
     background-color: rgba(255, 255, 255, 0.95);
     background-blend-mode: overlay;
