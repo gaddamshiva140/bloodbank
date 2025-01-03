@@ -6,6 +6,7 @@ import { Droplets, MapPin, Upload } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DonationCertificate } from "@/components/DonationCertificate";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -14,6 +15,8 @@ export const DonorRegistrationForm = () => {
   const [loading, setLoading] = useState(false);
   const [bloodGroup, setBloodGroup] = useState("");
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [showCertificate, setShowCertificate] = useState(false);
+  const [donorName, setDonorName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateDonorAge = (age: string) => {
@@ -85,102 +88,112 @@ export const DonorRegistrationForm = () => {
   };
 
   return (
-    <Card className="p-6">
-      <h2 className="text-xl font-semibold mb-4">Register as a Donor</h2>
-      <div className="flex justify-center mb-6">
-        <div className="relative">
-          <Avatar className="h-24 w-24 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-            <AvatarImage src={profileImage || ""} />
-            <AvatarFallback>
-              <Upload className="h-8 w-8 text-gray-400" />
-            </AvatarFallback>
-          </Avatar>
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="hidden"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
-        </div>
-      </div>
-      <form className="space-y-4" onSubmit={(e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const name = formData.get('name') as string;
-        const age = formData.get('age') as string;
-        const phone = formData.get('phone') as string;
-
-        if (!validateName(name) || !validateDonorAge(age) || !validatePhoneNumber(phone)) {
-          return;
-        }
-        // Handle form submission
-      }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input 
-            name="name" 
-            placeholder="Full Name" 
-            required 
-            pattern="[A-Za-z\s]+"
-            title="Name should only contain letters and spaces"
-          />
-          <Input
-            name="age"
-            placeholder="Age"
-            type="number"
-            min="18"
-            required
-          />
+    <>
+      <Card className="p-6">
+        <h2 className="text-xl font-semibold mb-4">Register as a Donor</h2>
+        <div className="flex justify-center mb-6">
           <div className="relative">
-            <Select value={bloodGroup} onValueChange={setBloodGroup} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Blood Group" />
-              </SelectTrigger>
-              <SelectContent>
-                {bloodGroups.map((group) => (
-                  <SelectItem key={group} value={group}>
-                    {group}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Avatar className="h-24 w-24 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+              <AvatarImage src={profileImage || ""} />
+              <AvatarFallback>
+                <Upload className="h-8 w-8 text-gray-400" />
+              </AvatarFallback>
+            </Avatar>
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
           </div>
-          <Input 
-            name="phone" 
-            placeholder="Phone Number" 
-            type="tel" 
-            pattern="\d{10}" 
-            title="Phone number must be exactly 10 digits"
-            required 
-            onInput={(e) => {
-              e.currentTarget.value = e.currentTarget.value.replace(/[^\d]/g, '');
-            }}
-          />
-          <Input name="email" placeholder="Email" type="email" required />
-          <div className="relative">
+        </div>
+        <form className="space-y-4" onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          const name = formData.get('name') as string;
+          const age = formData.get('age') as string;
+          const phone = formData.get('phone') as string;
+
+          if (!validateName(name) || !validateDonorAge(age) || !validatePhoneNumber(phone)) {
+            return;
+          }
+          
+          setDonorName(name);
+          setShowCertificate(true);
+        }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input 
+              name="name" 
+              placeholder="Full Name" 
+              required 
+              pattern="[A-Za-z\s]+"
+              title="Name should only contain letters and spaces"
+            />
             <Input
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              name="age"
+              placeholder="Age"
+              type="number"
+              min="18"
               required
             />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2"
-              onClick={getCurrentLocation}
-              disabled={loading}
-            >
-              <MapPin className="h-4 w-4" />
-            </Button>
+            <div className="relative">
+              <Select value={bloodGroup} onValueChange={setBloodGroup} required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Blood Group" />
+                </SelectTrigger>
+                <SelectContent>
+                  {bloodGroups.map((group) => (
+                    <SelectItem key={group} value={group}>
+                      {group}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <Input 
+              name="phone" 
+              placeholder="Phone Number" 
+              type="tel" 
+              pattern="\d{10}" 
+              title="Phone number must be exactly 10 digits"
+              required 
+              onInput={(e) => {
+                e.currentTarget.value = e.currentTarget.value.replace(/[^\d]/g, '');
+              }}
+            />
+            <Input name="email" placeholder="Email" type="email" required />
+            <div className="relative">
+              <Input
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                required
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-2 top-1/2 -translate-y-1/2"
+                onClick={getCurrentLocation}
+                disabled={loading}
+              >
+                <MapPin className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-        </div>
-        <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-          <Droplets className="h-4 w-4 mr-2" />
-          Register as Donor
-        </Button>
-      </form>
-    </Card>
+          <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+            <Droplets className="h-4 w-4 mr-2" />
+            Register as Donor
+          </Button>
+        </form>
+      </Card>
+      {showCertificate && (
+        <DonationCertificate 
+          donorName={donorName} 
+          onClose={() => setShowCertificate(false)} 
+        />
+      )}
+    </>
   );
 };

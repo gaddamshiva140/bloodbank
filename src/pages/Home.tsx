@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, UserPlus, Bell } from "lucide-react";
 import { DonorRegistrationForm } from "@/components/DonorRegistrationForm";
 import { BloodRequestForm } from "@/components/BloodRequestForm";
+import { DonationAnalytics } from "@/components/DonationAnalytics";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,16 +64,7 @@ const Home = () => {
               <BloodRequestForm />
             </TabsContent>
             <TabsContent value="analytics" className="mt-6">
-              <div className="w-full h-[600px] bg-white rounded-lg shadow-lg p-4">
-                <iframe
-                  title="Blood Donation Analytics"
-                  width="100%"
-                  height="100%"
-                  src="https://app.powerbi.com/view?r=YOUR_POWER_BI_EMBED_CODE"
-                  frameBorder="0"
-                  allowFullScreen
-                />
-              </div>
+              <DonationAnalytics />
             </TabsContent>
           </Tabs>
         </div>
