@@ -23,7 +23,7 @@ const Login = () => {
         <div className="space-y-2 text-center">
           <div className="flex items-center justify-center space-x-3">
             <img 
-              src="/lovable-uploads/81669374-3c99-4537-943d-3a8c64e29c5d.png" 
+              src="/lovable-uploads/1741deaa-39b5-4745-a15a-914eb02e0604.png" 
               alt="NCC Logo" 
               className="w-12 h-12 object-contain"
             />
