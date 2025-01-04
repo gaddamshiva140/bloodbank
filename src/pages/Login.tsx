@@ -21,7 +21,14 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 p-4">
       <Card className="w-full max-w-md p-8 space-y-6 animate-fadeIn">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold tracking-tight">NCC Blood Donation</h1>
+          <div className="flex items-center justify-center space-x-3">
+            <img 
+              src="/lovable-uploads/81669374-3c99-4537-943d-3a8c64e29c5d.png" 
+              alt="NCC Logo" 
+              className="w-12 h-12 object-contain"
+            />
+            <h1 className="text-3xl font-bold tracking-tight">NCC Blood Donation</h1>
+          </div>
           <p className="text-sm text-gray-500">Enter your credentials to continue</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">
