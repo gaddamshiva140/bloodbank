@@ -23,7 +23,7 @@ const Login = () => {
     toast.success("Welcome back!");
   };
 
-  const handleDialogClose = () => {
+  const handleContinue = () => {
     setShowThankYou(false);
     navigate("/home");
   };
@@ -88,7 +88,7 @@ const Login = () => {
         </Card>
       </div>
 
-      <Dialog open={showThankYou} onOpenChange={handleDialogClose}>
+      <Dialog open={showThankYou} onOpenChange={setShowThankYou}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-center text-2xl">Thank You for Choosing to Save Lives!</DialogTitle>
@@ -102,6 +102,11 @@ const Login = () => {
             <p className="text-center text-gray-600">
               Your decision to donate blood can save up to three lives. We appreciate your commitment to making a difference in someone's life.
             </p>
+            <div className="flex justify-center pt-4">
+              <Button onClick={handleContinue} className="w-40">
+                Continue
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
