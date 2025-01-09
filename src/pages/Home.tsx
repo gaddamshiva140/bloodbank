@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -7,9 +7,16 @@ import { DonorRegistrationForm } from "@/components/DonorRegistrationForm";
 import { BloodRequestForm } from "@/components/BloodRequestForm";
 import { DonationAnalytics } from "@/components/DonationAnalytics";
 import { Link } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showInfo, setShowInfo] = useState(true);
 
   return (
     <div className="min-h-screen bg-gray-50/90">
@@ -75,6 +82,39 @@ const Home = () => {
           </Tabs>
         </div>
       </main>
+
+      <Dialog open={showInfo} onOpenChange={setShowInfo}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center text-2xl">Welcome to NCC Blood Donation</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="text-center">
+              <img 
+                src="/lovable-uploads/5e30bd82-ebc5-4780-b3f7-15a6a1936240.png" 
+                alt="NCC Logo" 
+                className="mx-auto h-24 w-24 object-contain"
+              />
+            </div>
+            <div className="space-y-2">
+              <p className="text-center text-gray-600">
+                Here you can:
+              </p>
+              <ul className="list-disc pl-6 space-y-1 text-gray-600">
+                <li>Register as a blood donor</li>
+                <li>Request blood when needed</li>
+                <li>Search for donors by location or blood group</li>
+                <li>View donation analytics</li>
+              </ul>
+            </div>
+            <div className="flex justify-center pt-4">
+              <Button onClick={() => setShowInfo(false)} className="w-40">
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
