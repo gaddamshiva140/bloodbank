@@ -1,7 +1,30 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Utensils, Droplet, Coffee, Wine, Battery, Sun } from "lucide-react";
+import { Heart, Utensils, Droplet, Coffee, Wine, Battery, Sun, UserPlus, ThumbsUp, Plus } from "lucide-react";
 
 const Precautions = () => {
+  const motivationalPoints = [
+    {
+      icon: <Heart className="w-6 h-6 text-red-500" />,
+      title: "Save Lives",
+      description: "One donation can save up to 3 lives! Your single act of kindness can make a huge difference."
+    },
+    {
+      icon: <ThumbsUp className="w-6 h-6 text-blue-500" />,
+      title: "Health Benefits",
+      description: "Regular blood donation can reduce the risk of heart disease and help in maintaining good cardiovascular health."
+    },
+    {
+      icon: <Plus className="w-6 h-6 text-green-500" />,
+      title: "Quick Recovery",
+      description: "Your body replenishes the blood volume within 24 hours, and all red blood cells within a few weeks."
+    },
+    {
+      icon: <UserPlus className="w-6 h-6 text-purple-500" />,
+      title: "Be a Hero",
+      description: "Join our community of lifesavers. Every 2 seconds, someone needs blood - you can be their hero."
+    }
+  ];
+
   const precautions = [
     {
       icon: <Heart className="w-6 h-6 text-red-500" />,
@@ -58,8 +81,31 @@ const Precautions = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-3xl font-bold text-center text-gray-900">Blood Donation Guidelines</h1>
-        
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold text-gray-900">Why Donate Blood?</h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Every drop counts! Your blood donation can be the gift of life for someone in need.
+            Join us in this noble cause and become a lifesaver today.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {motivationalPoints.map((point, index) => (
+            <Card key={index} className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  {point.icon}
+                  {point.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">{point.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold text-center text-gray-900 mt-12">Blood Donation Guidelines</h2>
         <div className="grid md:grid-cols-2 gap-6">
           {precautions.map((section, index) => (
             <Card key={index}>
