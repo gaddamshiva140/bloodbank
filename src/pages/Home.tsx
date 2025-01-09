@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, UserPlus, Bell } from "lucide-react";
+import { Search, UserPlus, Bell, Info } from "lucide-react";
 import { DonorRegistrationForm } from "@/components/DonorRegistrationForm";
 import { BloodRequestForm } from "@/components/BloodRequestForm";
 import { DonationAnalytics } from "@/components/DonationAnalytics";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,6 +25,11 @@ const Home = () => {
               <h1 className="text-2xl font-bold text-gray-900">NCC Blood Donation</h1>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/precautions">
+                <Button variant="ghost" size="icon" className="text-primary">
+                  <Info className="h-5 w-5" />
+                </Button>
+              </Link>
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
               </Button>
