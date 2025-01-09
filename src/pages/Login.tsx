@@ -95,9 +95,9 @@ const Login = () => {
           </DialogHeader>
           <div className="space-y-4">
             <img
-              src="/lovable-uploads/5108c089-918a-49c7-886a-e2226b8072ba.png"
-              alt="Thank you"
-              className="w-full h-48 object-cover rounded-lg"
+              src="/lovable-uploads/6d45dad5-9928-4b9b-8692-5e61332377ce.png"
+              alt="Blood Donation"
+              className="w-full h-48 object-contain rounded-lg"
             />
             <p className="text-center text-gray-600">
               Your decision to donate blood can save up to three lives. We appreciate your commitment to making a difference in someone's life.
