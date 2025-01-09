@@ -89,7 +89,7 @@ const Login = () => {
       </div>
 
       <Dialog open={showThankYou} onOpenChange={setShowThankYou}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md" hideClose>
           <DialogHeader>
             <DialogTitle className="text-center text-2xl">Thank You for Choosing to Save Lives!</DialogTitle>
           </DialogHeader>
