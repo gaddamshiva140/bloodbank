@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import ChatBot from "@/components/ChatBot";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -82,6 +83,8 @@ const Home = () => {
           </Tabs>
         </div>
       </main>
+
+      <ChatBot />
 
       <Dialog open={showInfo} onOpenChange={setShowInfo}>
         <DialogContent className="sm:max-w-md">
