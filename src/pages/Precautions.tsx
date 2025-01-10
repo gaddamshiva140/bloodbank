@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Utensils, Droplet, Coffee, Wine, Battery, Sun, UserPlus, ThumbsUp, Plus } from "lucide-react";
+import { Heart, Utensils, Droplet, Coffee, Wine, Battery, Sun, UserPlus, ThumbsUp, Plus, Brain, Activity, Shield, Clock } from "lucide-react";
 
 const Precautions = () => {
   const motivationalPoints = [
@@ -12,6 +12,26 @@ const Precautions = () => {
       icon: <ThumbsUp className="w-6 h-6 text-blue-500" />,
       title: "Health Benefits",
       description: "Regular blood donation can reduce the risk of heart disease and help in maintaining good cardiovascular health."
+    },
+    {
+      icon: <Brain className="w-6 h-6 text-purple-500" />,
+      title: "Mental Well-being",
+      description: "The act of donating blood can boost your mental health by contributing to a sense of purpose and community service."
+    },
+    {
+      icon: <Activity className="w-6 h-6 text-green-500" />,
+      title: "Health Check",
+      description: "Free health screening before donation helps you stay informed about your vital signs and blood parameters."
+    },
+    {
+      icon: <Shield className="w-6 h-6 text-orange-500" />,
+      title: "Immune System",
+      description: "Regular blood donation can help stimulate the production of new blood cells, enhancing your immune system."
+    },
+    {
+      icon: <Clock className="w-6 h-6 text-indigo-500" />,
+      title: "Quick Process",
+      description: "The donation process takes only 30-45 minutes, but its impact lasts a lifetime for recipients."
     },
     {
       icon: <Plus className="w-6 h-6 text-green-500" />,
@@ -84,8 +104,9 @@ const Precautions = () => {
         <div className="text-center space-y-4">
           <h1 className="text-3xl font-bold text-gray-900">Why Donate Blood?</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Every drop counts! Your blood donation can be the gift of life for someone in need.
-            Join us in this noble cause and become a lifesaver today.
+            Blood donation is a vital community service that helps save millions of lives each year.
+            Your contribution can make a significant difference in emergency situations, surgeries,
+            and treating various medical conditions.
           </p>
         </div>
 
